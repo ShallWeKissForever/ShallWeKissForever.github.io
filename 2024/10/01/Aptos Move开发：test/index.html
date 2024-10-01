@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Gauss">
+
+
+
+
+
+<title>Aptos Move开发：Test | Gauss&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Gauss&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Gauss&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Aptos Move开发：Test</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Gauss</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 1, 2024&nbsp;&nbsp;17:20:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="如何在-Aptos-Move-中编写-Test-函数"><a href="#如何在-Aptos-Move-中编写-Test-函数" class="headerlink" title="如何在 Aptos Move 中编写 Test 函数"></a>如何在 Aptos Move 中编写 Test 函数</h1><p>在链上测试功能时，钱包通常只会返回类似 <code>generic error</code> 或 <code>object already exists at this address</code> 这样的笼统错误提示信息。当代码量庞大时，依赖这种提示去排查错误非常困难。编写 test 函数可以模拟链上环境，并通过精确到行的提示帮助我们快速定位代码中的逻辑错误，从而提升开发效率。本文将通过我编写的一个 test 函数为例，讲解如何在 Aptos Move 中编写 <code>#[test]</code> 函数。</p>
+<h2 id="test-方法"><a href="#test-方法" class="headerlink" title="#[test] 方法"></a><code>#[test]</code> 方法</h2><p>在一个函数的上一行使用 <code>#[test]</code> 标记即可将其定义为一个 test 函数：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[test]</span>  </span><br><span class="line">fun <span class="title function_ invoke__">test</span>() &#123;</span><br><span class="line">	<span class="comment">// 你的测试代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化测试环境"><a href="#初始化测试环境" class="headerlink" title="初始化测试环境"></a>初始化测试环境</h2><h3 id="初始化账户"><a href="#初始化账户" class="headerlink" title="初始化账户"></a>初始化账户</h3><p><code>aptos_framework</code> 使用官方 <code>0x1</code> 地址进行初始化，用于执行一些需要官方签名者才能使用的方法。<code>deployer</code> 是合约的管理员。由于我的合约涉及多个账户操作，因此需要初始化 <code>user1</code> 和 <code>user2</code> 这两个账户。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化测试账户</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">aptos_framework</span> = account::<span class="title function_ invoke__">create_account_for_test</span>(@<span class="number">0x1</span>);  </span><br><span class="line"><span class="comment">// @deployer 是在 Move.toml 中指定的地址</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">deployer</span> = account::<span class="title function_ invoke__">create_account_for_test</span>(@deployer);  </span><br><span class="line"><span class="keyword">let</span> <span class="variable">user1</span> = account::<span class="title function_ invoke__">create_account_for_test</span>(@<span class="number">0xaaa1</span>);  </span><br><span class="line"><span class="keyword">let</span> <span class="variable">user2</span> = account::<span class="title function_ invoke__">create_account_for_test</span>(@<span class="number">0xbbb2</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化时间戳"><a href="#初始化时间戳" class="headerlink" title="初始化时间戳"></a>初始化时间戳</h3><p>合约中的功能涉及时间戳，可以通过以下函数来初始化并修改时间戳到指定的时间点：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 启动并设置时间戳</span></span><br><span class="line">timestamp::<span class="title function_ invoke__">set_time_has_started_for_testing</span>(&amp;aptos_framework);  </span><br><span class="line">timestamp::<span class="title function_ invoke__">update_global_time_for_test</span>(<span class="number">1700000000_000_000</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建-Fungible-Asset-FA"><a href="#创建-Fungible-Asset-FA" class="headerlink" title="创建 Fungible Asset (FA)"></a>创建 Fungible Asset (FA)</h2><p>为了测试合约中的 swap 功能，需要创建两种 FA，并将它们 mint 给两个用户账户。创建 FA 的步骤与在正常合约中一致：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建第一个 FA</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">object1_cref</span> = object::<span class="title function_ invoke__">create_named_object</span>(&amp;deployer, <span class="string">b&quot;GAU&quot;</span>);  </span><br><span class="line">primary_fungible_store::<span class="title function_ invoke__">create_primary_store_enabled_fungible_asset</span>(  </span><br><span class="line">    &amp;object1_cref,  </span><br><span class="line">    option::<span class="title function_ invoke__">none</span>(),  </span><br><span class="line">    <span class="title function_ invoke__">utf8</span>(<span class="string">b&quot;GAU&quot;</span>),  </span><br><span class="line">    <span class="title function_ invoke__">utf8</span>(<span class="string">b&quot;GAU&quot;</span>),  </span><br><span class="line">    <span class="number">6</span>,  </span><br><span class="line">    <span class="title function_ invoke__">utf8</span>(<span class="string">b&quot;&quot;</span>),  </span><br><span class="line">    <span class="title function_ invoke__">utf8</span>(<span class="string">b&quot;&quot;</span>),  </span><br><span class="line">);  </span><br><span class="line"><span class="keyword">let</span> <span class="variable">object1_metadata</span> = object::object_from_constructor_ref&lt;Metadata&gt;(&amp;object1_cref);  </span><br><span class="line"><span class="keyword">let</span> <span class="variable">token1_mint_ref</span> = fungible_asset::<span class="title function_ invoke__">generate_mint_ref</span>(&amp;object1_cref);  </span><br><span class="line">debug::<span class="title function_ invoke__">print</span>(&amp;object1_metadata);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 创建第二个 FA</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">object2_cref</span> = object::<span class="title function_ invoke__">create_named_object</span>(&amp;deployer, <span class="string">b&quot;USS&quot;</span>);  </span><br><span class="line">primary_fungible_store::<span class="title function_ invoke__">create_primary_store_enabled_fungible_asset</span>(  </span><br><span class="line">    &amp;object2_cref,  </span><br><span class="line">    option::<span class="title function_ invoke__">none</span>(),  </span><br><span class="line">    <span class="title function_ invoke__">utf8</span>(<span class="string">b&quot;USS&quot;</span>),  </span><br><span class="line">    <span class="title function_ invoke__">utf8</span>(<span class="string">b&quot;USS&quot;</span>),  </span><br><span class="line">    <span class="number">6</span>,  </span><br><span class="line">    <span class="title function_ invoke__">utf8</span>(<span class="string">b&quot;&quot;</span>),  </span><br><span class="line">    <span class="title function_ invoke__">utf8</span>(<span class="string">b&quot;&quot;</span>),  </span><br><span class="line">);  </span><br><span class="line"><span class="keyword">let</span> <span class="variable">object2_metadata</span> = object::object_from_constructor_ref&lt;Metadata&gt;(&amp;object2_cref);  </span><br><span class="line"><span class="keyword">let</span> <span class="variable">token2_mint_ref</span> = fungible_asset::<span class="title function_ invoke__">generate_mint_ref</span>(&amp;object2_cref);  </span><br><span class="line">debug::<span class="title function_ invoke__">print</span>(&amp;object2_metadata);  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 将 FA mint 给两个用户账户</span></span><br><span class="line">primary_fungible_store::<span class="title function_ invoke__">mint</span>(&amp;token1_mint_ref, signer::<span class="title function_ invoke__">address_of</span>(&amp;user1), <span class="number">1000_000_000</span>);  </span><br><span class="line">primary_fungible_store::<span class="title function_ invoke__">mint</span>(&amp;token2_mint_ref, signer::<span class="title function_ invoke__">address_of</span>(&amp;user1), <span class="number">1000_000_000</span>);  </span><br><span class="line">primary_fungible_store::<span class="title function_ invoke__">mint</span>(&amp;token1_mint_ref, signer::<span class="title function_ invoke__">address_of</span>(&amp;user2), <span class="number">1000_000_000</span>);  </span><br><span class="line">primary_fungible_store::<span class="title function_ invoke__">mint</span>(&amp;token2_mint_ref, signer::<span class="title function_ invoke__">address_of</span>(&amp;user2), <span class="number">1000_000_000</span>);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 打印用户余额</span></span><br><span class="line">debug::<span class="title function_ invoke__">print</span>(&amp;primary_fungible_store::<span class="title function_ invoke__">balance</span>(signer::<span class="title function_ invoke__">address_of</span>(&amp;user1), object1_metadata));  </span><br><span class="line"><span class="comment">// 输出：1000_000_000</span></span><br><span class="line">debug::<span class="title function_ invoke__">print</span>(&amp;primary_fungible_store::<span class="title function_ invoke__">balance</span>(signer::<span class="title function_ invoke__">address_of</span>(&amp;user1), object2_metadata));</span><br><span class="line"><span class="comment">// 输出：1000_000_000</span></span><br></pre></td></tr></table></figure>
+
+<p>可以使用 <code>debug::print(&amp;T)</code> 来打印变量的值，方便确认其是否符合预期。还可以使用 <code>!assert()</code> 来检查某个条件是否为真：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!<span class="title function_ invoke__">assert</span>(primary_fungible_store::<span class="title function_ invoke__">balance</span>(signer::<span class="title function_ invoke__">address_of</span>(&amp;user1), object1_metadata) == <span class="number">1000_000_000</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码会检查 <code>user1</code> 的 <code>token_1</code> 余额是否为刚 mint 的 1000_000_000，否则将报错并返回错误码 <code>1</code>。</p>
+<h2 id="进行测试"><a href="#进行测试" class="headerlink" title="进行测试"></a>进行测试</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化合约</span></span><br><span class="line"><span class="title function_ invoke__">initialize</span>(&amp;deployer);  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建资金池</span></span><br><span class="line"><span class="title function_ invoke__">create_pool</span>(object1_metadata, object2_metadata, <span class="literal">false</span>);  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 用户1添加流动性</span></span><br><span class="line"><span class="title function_ invoke__">add_liquidity_entry</span>(  </span><br><span class="line">    &amp;user1,  </span><br><span class="line">    object1_metadata,  </span><br><span class="line">    object2_metadata,  </span><br><span class="line">    <span class="literal">false</span>,  </span><br><span class="line">    <span class="number">100_000_000</span>,  </span><br><span class="line">    <span class="number">100_000_000</span>,  </span><br><span class="line">    <span class="number">1</span>,  </span><br><span class="line">    <span class="number">1</span>  </span><br><span class="line">);  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印用户1的余额</span></span><br><span class="line">debug::<span class="title function_ invoke__">print</span>(&amp;primary_fungible_store::<span class="title function_ invoke__">balance</span>(signer::<span class="title function_ invoke__">address_of</span>(&amp;user1), object1_metadata));  </span><br><span class="line">debug::<span class="title function_ invoke__">print</span>(&amp;primary_fungible_store::<span class="title function_ invoke__">balance</span>(signer::<span class="title function_ invoke__">address_of</span>(&amp;user1), object2_metadata));  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 用户2添加流动性</span></span><br><span class="line"><span class="title function_ invoke__">add_liquidity_entry</span>(  </span><br><span class="line">    &amp;user2,  </span><br><span class="line">    object1_metadata,  </span><br><span class="line">    object2_metadata,  </span><br><span class="line">    <span class="literal">false</span>,  </span><br><span class="line">    <span class="number">100_000_000</span>,  </span><br><span class="line">    <span class="number">100_000_000</span>,  </span><br><span class="line">    <span class="number">1</span>,  </span><br><span class="line">    <span class="number">1</span>  </span><br><span class="line">);  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印用户2的余额</span></span><br><span class="line">debug::<span class="title function_ invoke__">print</span>(&amp;primary_fungible_store::<span class="title function_ invoke__">balance</span>(signer::<span class="title function_ invoke__">address_of</span>(&amp;user2), object1_metadata));  </span><br><span class="line">debug::<span class="title function_ invoke__">print</span>(&amp;primary_fungible_store::<span class="title function_ invoke__">balance</span>(signer::<span class="title function_ invoke__">address_of</span>(&amp;user2), object2_metadata));  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 用户1移除流动性</span></span><br><span class="line"><span class="title function_ invoke__">remove_liquidity_entry</span>(  </span><br><span class="line">    &amp;user1,  </span><br><span class="line">    object1_metadata,  </span><br><span class="line">    object2_metadata,  </span><br><span class="line">    <span class="literal">false</span>,  </span><br><span class="line">    <span class="number">99_999_000</span>,  </span><br><span class="line">    <span class="number">1</span>,  </span><br><span class="line">    <span class="number">1</span>,  </span><br><span class="line">    <span class="title function_ invoke__">address_of</span>(&amp;user1)  </span><br><span class="line">);  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 用户1再次添加流动性</span></span><br><span class="line"><span class="title function_ invoke__">add_liquidity_entry</span>(  </span><br><span class="line">    &amp;user1,  </span><br><span class="line">    object1_metadata,  </span><br><span class="line">    object2_metadata,  </span><br><span class="line">    <span class="literal">false</span>,  </span><br><span class="line">    <span class="number">100_000_000</span>,  </span><br><span class="line">    <span class="number">100_000_000</span>,  </span><br><span class="line">    <span class="number">1</span>,  </span><br><span class="line">    <span class="number">1</span>  </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>如果出现错误，系统将返回完整的错误信息和堆栈跟踪，帮助我们快速定位问题。</p>
+<p><img src="/../images/Aptos%20Move%E5%BC%80%E5%8F%91%EF%BC%9Atest/1.png" alt="错误"></p>
+<p>修复错误后成功通过测试，笑嘻啦<br><img src="/../images/Aptos%20Move%E5%BC%80%E5%8F%91%EF%BC%9Atest/2.png" alt="成功"><br><a target="_blank" rel="noopener" href="https://imgse.com/i/pA3GXon"><img src="https://s21.ax1x.com/2024/10/01/pA3GXon.jpg" alt="pA3GXon.jpg"></a></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Aptos/"># Aptos</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Gauss | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
