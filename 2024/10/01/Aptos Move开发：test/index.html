@@ -206,13 +206,20 @@
                         </span>
                     
                     
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Aptos-Move/">Aptos Move</a>
+                            
+                        </span>
+                    
                 </div>
             
         </header>
 
         <div class="post-content">
-            <h1 id="如何在-Aptos-Move-中编写-Test-函数"><a href="#如何在-Aptos-Move-中编写-Test-函数" class="headerlink" title="如何在 Aptos Move 中编写 Test 函数"></a>如何在 Aptos Move 中编写 Test 函数</h1><p>在链上测试功能时，钱包通常只会返回类似 <code>generic error</code> 或 <code>object already exists at this address</code> 这样的笼统错误提示信息。当代码量庞大时，依赖这种提示去排查错误非常困难。编写 test 函数可以模拟链上环境，并通过精确到行的提示帮助我们快速定位代码中的逻辑错误，从而提升开发效率。本文将通过我编写的一个 test 函数为例，讲解如何在 Aptos Move 中编写 <code>#[test]</code> 函数。</p>
-<h2 id="test-方法"><a href="#test-方法" class="headerlink" title="#[test] 方法"></a><code>#[test]</code> 方法</h2><p>在一个函数的上一行使用 <code>#[test]</code> 标记即可将其定义为一个 test 函数：</p>
+            <h1 id="如何在-Aptos-Move-中编写-Test-函数"><a href="#如何在-Aptos-Move-中编写-Test-函数" class="headerlink" title="如何在 Aptos Move 中编写 Test 函数"></a>如何在 Aptos Move 中编写 Test 函数</h1><p>在链上测试功能时，钱包通常只会返回类似 <code>generic error</code> 或 <code>object already exists at this address</code> 这样的笼统错误提示信息。当代码量庞大时，依赖这种提示去排查错误非常困难。编写 test 函数可以通过精确到行的提示帮助我们快速定位代码中的逻辑错误，从而提升开发效率。本文将通过我编写的一个 test 函数为例，讲解如何在 Aptos Move 中编写 <code>#[test]</code> 函数。</p>
+<h2 id="test-函数"><a href="#test-函数" class="headerlink" title="#[test] 函数"></a><code>#[test]</code> 函数</h2><p>在一个函数的上一行使用 <code>#[test]</code> 标记即可将其定义为一个 test 函数：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[test]</span>  </span><br><span class="line">fun <span class="title function_ invoke__">test</span>() &#123;</span><br><span class="line">	<span class="comment">// 你的测试代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="初始化测试环境"><a href="#初始化测试环境" class="headerlink" title="初始化测试环境"></a>初始化测试环境</h2><h3 id="初始化账户"><a href="#初始化账户" class="headerlink" title="初始化账户"></a>初始化账户</h3><p><code>aptos_framework</code> 使用官方 <code>0x1</code> 地址进行初始化，用于执行一些需要官方签名者才能使用的方法。<code>deployer</code> 是合约的管理员。由于我的合约涉及多个账户操作，因此需要初始化 <code>user1</code> 和 <code>user2</code> 这两个账户。</p>
@@ -244,6 +251,12 @@
                     
                     
                         <a href="/tags/Aptos/"># Aptos</a>
+                    
+                        <a href="/tags/Move/"># Move</a>
+                    
+                        <a href="/tags/Test/"># Test</a>
+                    
+                        <a href="/tags/%E5%BC%80%E5%8F%91/"># 开发</a>
                     
                         
                 </span>
