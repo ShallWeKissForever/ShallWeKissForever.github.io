@@ -223,7 +223,7 @@
 <h4 id="3-编写合约"><a href="#3-编写合约" class="headerlink" title="3. 编写合约"></a>3. 编写合约</h4><p>在合约的模块声明部分，使用你在 <code>Move.toml</code> 文件中定义的地址别名来编写模块。比如：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">module a::contract_name &#123;</span><br><span class="line">    <span class="comment">// 合约内容</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>其中，<code>a</code> 是你在 <code>Move.toml</code> 中定义的地址别名，<code>contract_name</code> 是模块名称。</p>
+<p>其中，<code>a</code> 是你在 <code>Move.toml</code> 中定义的地址别名，<code>contract_name</code> 是合约名称。</p>
 <h4 id="4-部署合约到-Object-上"><a href="#4-部署合约到-Object-上" class="headerlink" title="4. 部署合约到 Object 上"></a>4. 部署合约到 Object 上</h4><p>在终端中执行以下命令，将合约部署到 Object 上：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aptos move deploy-object --address-name a</span><br></pre></td></tr></table></figure>
 
