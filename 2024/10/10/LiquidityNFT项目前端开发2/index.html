@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Gauss">
+
+
+
+
+
+<title>LiquidityNFT项目前端开发2 | Gauss&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Gauss&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Gauss&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">LiquidityNFT项目前端开发2</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Gauss</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 10, 2024&nbsp;&nbsp;13:43:16</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Ant-Design（Antd）栅格系统"><a href="#Ant-Design（Antd）栅格系统" class="headerlink" title="Ant Design（Antd）栅格系统"></a>Ant Design（Antd）栅格系统</h2><p>Ant Design（Antd）的栅格系统基于 <strong>Flexbox</strong> 布局，用于创建响应式布局。它的设计目标是帮助开发者在不同的屏幕尺寸上创建一致的布局结构。栅格系统提供了非常灵活的方式来创建响应式布局，并基于 Flexbox 提供了强大的对齐和布局能力。你可以利用 <code>Row</code> 和 <code>Col</code> 的属性来根据屏幕大小和内容需求轻松调整布局。</p>
+<h3 id="1-栅格的基本概念"><a href="#1-栅格的基本概念" class="headerlink" title="1. 栅格的基本概念"></a>1. 栅格的基本概念</h3><p>Antd 的栅格系统主要由两部分组成：</p>
+<ul>
+<li><strong>Row（行）</strong>：用来创建行，它在水平方向上容纳 <code>Col</code>。</li>
+<li><strong>Col（列）</strong>：用来创建列，它在水平和垂直方向上对齐内容，并定义其在栅格中的宽度。</li>
+</ul>
+<h4 id="基础结构"><a href="#基础结构" class="headerlink" title="基础结构"></a>基础结构</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Row</span>, <span class="title class_">Col</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;antd&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; (</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Row</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">Col</span> <span class="attr">span</span>=<span class="string">&#123;12&#125;</span>&gt;</span>Column 1<span class="tag">&lt;/<span class="name">Col</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">Col</span> <span class="attr">span</span>=<span class="string">&#123;12&#125;</span>&gt;</span>Column 2<span class="tag">&lt;/<span class="name">Col</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">Row</span>&gt;</span></span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，<code>Row</code> 表示一行，而 <code>Col</code> 表示一列。每个 <code>Col</code> 的 <code>span</code> 属性决定了它的宽度，<code>span=&#123;12&#125;</code> 表示该列占用了 12 个栅格空间，总共可以有 24 个栅格。</p>
+<h3 id="2-栅格的属性"><a href="#2-栅格的属性" class="headerlink" title="2. 栅格的属性"></a>2. 栅格的属性</h3><h4 id="Row-属性"><a href="#Row-属性" class="headerlink" title="Row 属性"></a>Row 属性</h4><ul>
+<li><p><strong>gutter</strong>: 设置栅格之间的间距。可以是单个数字（像素），也可以是数组（分别表示水平方向和垂直方向的间距）。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Row</span> gutter=&#123;<span class="number">16</span>&#125;&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Col</span> <span class="attr">span</span>=<span class="string">&#123;12&#125;</span>&gt;</span>Column 1<span class="tag">&lt;/<span class="name">Col</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Col</span> <span class="attr">span</span>=<span class="string">&#123;12&#125;</span>&gt;</span>Column 2<span class="tag">&lt;/<span class="name">Col</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Row</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>或者设置水平方向和垂直方向不同的间距：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Row</span> gutter=&#123;[<span class="number">16</span>, <span class="number">24</span>]&#125;&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Col</span> <span class="attr">span</span>=<span class="string">&#123;12&#125;</span>&gt;</span>Column 1<span class="tag">&lt;/<span class="name">Col</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Col</span> <span class="attr">span</span>=<span class="string">&#123;12&#125;</span>&gt;</span>Column 2<span class="tag">&lt;/<span class="name">Col</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Row</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>align</strong>: 设置列的垂直对齐方式。可选值为 <code>top</code>，<code>middle</code>，<code>bottom</code>。</p>
+</li>
+<li><p><strong>justify</strong>: 设置列的水平排列方式。可选值为 <code>start</code>，<code>end</code>，<code>center</code>，<code>space-around</code>，<code>space-between</code>。</p>
+</li>
+</ul>
+<h4 id="Col-属性"><a href="#Col-属性" class="headerlink" title="Col 属性"></a>Col 属性</h4><ul>
+<li><p><strong>span</strong>: 设置列在栅格系统中的占比，最大值为 24。</p>
+</li>
+<li><p><strong>offset</strong>: 设置列的左侧偏移，最大值为 24。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Row</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Col</span> <span class="attr">span</span>=<span class="string">&#123;8&#125;</span> <span class="attr">offset</span>=<span class="string">&#123;8&#125;</span>&gt;</span>Centered Column<span class="tag">&lt;/<span class="name">Col</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Row</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>push</strong> &#x2F; <strong>pull</strong>: 用于移动列的位置，<code>push</code> 向右移动，<code>pull</code> 向左移动。</p>
+</li>
+</ul>
+<h3 id="3-响应式布局"><a href="#3-响应式布局" class="headerlink" title="3. 响应式布局"></a>3. 响应式布局</h3><p>Antd 的栅格系统支持响应式布局，允许根据不同的屏幕尺寸动态调整列宽。支持的断点如下：</p>
+<ul>
+<li><code>xs</code>：<code>&lt;576px</code></li>
+<li><code>sm</code>：<code>≥576px</code></li>
+<li><code>md</code>：<code>≥768px</code></li>
+<li><code>lg</code>：<code>≥992px</code></li>
+<li><code>xl</code>：<code>≥1200px</code></li>
+<li><code>xxl</code>：<code>≥1600px</code></li>
+</ul>
+<p>可以针对不同的断点设置不同的 <code>span</code> 值：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Row</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Col</span> <span class="attr">xs</span>=<span class="string">&#123;24&#125;</span> <span class="attr">sm</span>=<span class="string">&#123;12&#125;</span> <span class="attr">md</span>=<span class="string">&#123;8&#125;</span> <span class="attr">lg</span>=<span class="string">&#123;6&#125;</span> <span class="attr">xl</span>=<span class="string">&#123;4&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    Responsive Column</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">Col</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Row</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，列在极小屏幕上占满 24 栅格宽度（100% 宽度），在稍大的屏幕上逐渐缩小为 12、8、6、4 栅格宽度。</p>
+<h3 id="4-使用-Flex-布局"><a href="#4-使用-Flex-布局" class="headerlink" title="4. 使用 Flex 布局"></a>4. 使用 Flex 布局</h3><p>Antd 的栅格基于 Flexbox，因此可以直接利用 Flex 的特性对内容进行布局。</p>
+<ul>
+<li>可以通过 <code>justify</code> 属性来控制水平对齐方式，例如居中对齐或两端对齐。</li>
+<li>通过 <code>align</code> 来控制垂直方向的对齐。</li>
+</ul>
+<h4 id="例子：居中对齐"><a href="#例子：居中对齐" class="headerlink" title="例子：居中对齐"></a>例子：居中对齐</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Row</span> justify=<span class="string">&quot;center&quot;</span> align=<span class="string">&quot;middle&quot;</span> style=&#123;&#123; <span class="attr">height</span>: <span class="string">&#x27;100vh&#x27;</span> &#125;&#125;&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Col</span> <span class="attr">span</span>=<span class="string">&#123;6&#125;</span>&gt;</span>Centered Column<span class="tag">&lt;/<span class="name">Col</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Row</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>这个例子会让内容在屏幕上居中显示。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/10/14/Aptos%20Move%E5%BC%80%E5%8F%91%EF%BC%9Adeploy-object/">Aptos Move开发：deploy-object</a>
+            
+            
+            <a class="next" rel="next" href="/2024/10/08/LiquidityNFT%E9%A1%B9%E7%9B%AE%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%911%EF%BC%9A%E5%AF%BC%E8%88%AA%E6%A0%8F/">LiquidityNFT项目前端开发1：导航栏</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Gauss | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

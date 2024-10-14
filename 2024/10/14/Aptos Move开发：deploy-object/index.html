@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Gauss">
+
+
+
+
+
+<title>Aptos Move开发：deploy-object | Gauss&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Gauss&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Gauss&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Aptos Move开发：deploy-object</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Gauss</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 14, 2024&nbsp;&nbsp;15:17:29</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="如何在-Aptos-Move-上使用-aptos-move-deploy-object-将包发布到-Object-上"><a href="#如何在-Aptos-Move-上使用-aptos-move-deploy-object-将包发布到-Object-上" class="headerlink" title="如何在 Aptos Move 上使用 aptos move deploy-object 将包发布到 Object 上"></a>如何在 Aptos Move 上使用 <code>aptos move deploy-object</code> 将包发布到 Object 上</h3><p>本文记录了如何通过 Aptos Move 的 <code>aptos move deploy-object</code> 命令，将 Move 包发布到 Object 上。这种方式可以有效降低部署的复杂性，并提供一种更安全的方式来管理代码所有者的访问控制策略。</p>
+<h4 id="1-初始化-Aptos-项目并生成账户"><a href="#1-初始化-Aptos-项目并生成账户" class="headerlink" title="1. 初始化 Aptos 项目并生成账户"></a>1. 初始化 Aptos 项目并生成账户</h4><p>首先，确保已经安装了 Aptos CLI 工具。然后使用以下命令生成一个新的账户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aptos init</span><br></pre></td></tr></table></figure>
+
+<p>该命令会在本地环境中生成一个账户，并将账户地址保存在配置文件中，供后续操作使用。</p>
+<h4 id="2-配置-Move-toml"><a href="#2-配置-Move-toml" class="headerlink" title="2. 配置 Move.toml"></a>2. 配置 <code>Move.toml</code></h4><p>在项目的根目录中，你需要编辑 <code>Move.toml</code> 文件，指定合约的地址。找到 <code>[addresses]</code> 部分，并按如下方式配置：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[addresses]</span></span><br><span class="line"><span class="attr">a</span> = <span class="string">&quot;_&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的 <code>a</code> 是地址的别名，你可以自定义这个别名。实际的地址会在部署时自动填充。</p>
+<h4 id="3-编写合约"><a href="#3-编写合约" class="headerlink" title="3. 编写合约"></a>3. 编写合约</h4><p>在合约的模块声明部分，使用你在 <code>Move.toml</code> 文件中定义的地址别名来编写模块。比如：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">module a::contract_name &#123;</span><br><span class="line">    <span class="comment">// 合约内容</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>a</code> 是你在 <code>Move.toml</code> 中定义的地址别名，<code>contract_name</code> 是模块名称。</p>
+<h4 id="4-部署合约到-Object-上"><a href="#4-部署合约到-Object-上" class="headerlink" title="4. 部署合约到 Object 上"></a>4. 部署合约到 Object 上</h4><p>在终端中执行以下命令，将合约部署到 Object 上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aptos move deploy-object --address-name a</span><br></pre></td></tr></table></figure>
+
+<p>这里，<code>--address-name a</code> 表示将合约部署到你之前在 <code>Move.toml</code> 中配置的地址别名 <code>a</code> 对应的账户。</p>
+<h4 id="5-部署细节"><a href="#5-部署细节" class="headerlink" title="5. 部署细节"></a>5. 部署细节</h4><ul>
+<li><strong>所有权管理</strong>：合约部署到 Object 后，其所有权将归属于你通过 <code>aptos init</code> 命令生成的地址。这样能够确保只有合约所有者能够对合约进行管理和修改，从而提供了一种更安全的代码管理机制。</li>
+<li><strong>部署简化</strong>：使用 <code>deploy-object</code> 命令能够简化合约发布流程，无需手动处理复杂的部署步骤。</li>
+</ul>
+<hr>
+<p>通过以上步骤，你可以轻松地在 Aptos Move 上使用 <code>aptos move deploy-object</code> 将合约发布到 Object 上，并确保安全的所有权管理。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Aptos/"># Aptos</a>
+                    
+                        <a href="/tags/Move/"># Move</a>
+                    
+                        <a href="/tags/%E5%BC%80%E5%8F%91/"># 开发</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2024/10/10/LiquidityNFT%E9%A1%B9%E7%9B%AE%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%912/">LiquidityNFT项目前端开发2</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Gauss | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
