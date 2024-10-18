@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Gauss">
+
+
+
+
+
+<title>LiquidityNFT项目前端开发：拉取数据&amp;链上交互 | Gauss&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/head.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Gauss&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Gauss&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">LiquidityNFT项目前端开发：拉取数据&amp;链上交互</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Gauss</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 18, 2024&nbsp;&nbsp;17:07:51</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Aptos-Move/">Aptos Move</a>
+                            
+                                <a href="/categories/Aptos-Move/LiquidityNFT/">LiquidityNFT</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>本文记录了如何在 React 项目中使用 Aptos 的 TypeScript SDK与 Aptos 区块链进行交互，包括如何拉取链上数据和调用 <code>entry</code> 方法。</p>
+<h2 id="一、拉取数据"><a href="#一、拉取数据" class="headerlink" title="一、拉取数据"></a>一、拉取数据</h2><h3 id="1-导入-ts-sdk-包"><a href="#1-导入-ts-sdk-包" class="headerlink" title="1. 导入 ts-sdk 包"></a>1. 导入 <code>ts-sdk</code> 包</h3><p>首先，需要导入 <code>ts-sdk</code> 包来与 Aptos 区块链交互：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Aptos</span>, <span class="title class_">AptosConfig</span>, <span class="title class_">Network</span> &#125; <span class="keyword">from</span> <span class="string">&quot;@aptos-labs/ts-sdk&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-设置-Aptos-与-Testnet-网络交互"><a href="#2-设置-Aptos-与-Testnet-网络交互" class="headerlink" title="2. 设置 Aptos 与 Testnet 网络交互"></a>2. 设置 Aptos 与 Testnet 网络交互</h3><p>接下来，设置与 Aptos Testnet 网络进行通信的配置：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> aptosConfig = <span class="keyword">new</span> <span class="title class_">AptosConfig</span>(&#123; <span class="attr">network</span>: <span class="title class_">Network</span>.<span class="property">TESTNET</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-初始化一个-Aptos-实例"><a href="#3-初始化一个-Aptos-实例" class="headerlink" title="3. 初始化一个 Aptos 实例"></a>3. 初始化一个 Aptos 实例</h3><p>使用配置初始化一个 Aptos 实例：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> aptos = <span class="keyword">new</span> <span class="title class_">Aptos</span>(aptosConfig);</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-调用-aptos-view-方法拉取数据"><a href="#4-调用-aptos-view-方法拉取数据" class="headerlink" title="4. 调用 aptos.view 方法拉取数据"></a>4. 调用 <code>aptos.view</code> 方法拉取数据</h3><p>现在可以通过 <code>aptos.view</code> 方法从链上拉取数据。下面的示例中，我们调用了 <code>fungible_asset</code> 合约中的 <code>name</code> 函数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = <span class="keyword">await</span> aptos.<span class="title function_">view</span>(&#123;</span><br><span class="line">  <span class="attr">payload</span>: &#123;</span><br><span class="line">    <span class="attr">function</span>: <span class="string">&quot;0x1::fungible_asset::name&quot;</span>,</span><br><span class="line">    <span class="attr">typeArguments</span>: [<span class="string">&quot;0x1::fungible_asset::Metadata&quot;</span>],</span><br><span class="line">    <span class="attr">functionArguments</span>: [token1],</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="参数说明："><a href="#参数说明：" class="headerlink" title="参数说明："></a>参数说明：</h4><ul>
+<li><p><strong><code>function</code></strong>: 调用的方法路径，例如 <code>0x1::fungible_asset::name</code>。</p>
+<ul>
+<li><code>0x1</code>: 合约地址。</li>
+<li><code>fungible_asset</code>: 合约名称。</li>
+<li><code>name</code>: 函数名。</li>
+</ul>
+</li>
+<li><p><strong><code>typeArguments</code></strong>: 泛型参数的类型。如果函数不需要泛型参数，传入空数组 <code>[]</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#[view]</span><br><span class="line">public fun name&lt;T: key&gt;(metadata: object::Object&lt;T&gt;): string::String</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>functionArguments</code></strong>: 传入函数的实际参数列表，使用数组的形式传递 <code>[参数1, 参数2, ...]</code>。</p>
+</li>
+</ul>
+<h4 id="结果处理："><a href="#结果处理：" class="headerlink" title="结果处理："></a>结果处理：</h4><p><code>result</code> 是一个包含 Move 值的数组。在这个例子中，调用 <code>name</code> 函数会返回一个 <code>string</code> 类型的值，可以通过 <code>result[0]</code> 获取这个值：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result[<span class="number">0</span>]); <span class="comment">// 输出链上返回的名字</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二、链上交互"><a href="#二、链上交互" class="headerlink" title="二、链上交互"></a>二、链上交互</h2><h3 id="1-导入钱包和交易包"><a href="#1-导入钱包和交易包" class="headerlink" title="1. 导入钱包和交易包"></a>1. 导入钱包和交易包</h3><p>首先，从 <code>wallet-adapter-react</code> 包中导入 <code>useWallet</code> 和 <code>InputTransactionData</code>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useWallet, <span class="title class_">InputTransactionData</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@aptos-labs/wallet-adapter-react&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>account</code> 对象在没有连接钱包时为 <code>null</code>，连接钱包后 <code>account</code> 对象会包含账户信息，包括账户地址。</p>
+<h3 id="2-获取账户和签名方法"><a href="#2-获取账户和签名方法" class="headerlink" title="2. 获取账户和签名方法"></a>2. 获取账户和签名方法</h3><p>使用 <code>useWallet</code> 钩子来获取账户信息和提交交易的方法：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; account, signAndSubmitTransaction &#125; = <span class="title function_">useWallet</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-创建交易并调用链上-Entry-方法"><a href="#3-创建交易并调用链上-Entry-方法" class="headerlink" title="3. 创建交易并调用链上 Entry 方法"></a>3. 创建交易并调用链上 Entry 方法</h3><p>我们要调用的合约接口是 <code>create_pool</code>，其定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public entry fun create_pool(</span><br><span class="line">    token_1: Object&lt;Metadata&gt;,</span><br><span class="line">    token_2: Object&lt;Metadata&gt;,</span><br><span class="line">    is_stable: bool,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="构建交易数据"><a href="#构建交易数据" class="headerlink" title="构建交易数据"></a>构建交易数据</h4><p>创建一个交易对象 <code>transactionCreatePool</code>，传入相应的函数路径和参数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="attr">transactionCreatePool</span>: <span class="title class_">InputTransactionData</span> = &#123;</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">function</span>: <span class="string">`<span class="subst">$&#123;moduleAddress&#125;</span>::router::create_pool`</span>,</span><br><span class="line">    <span class="attr">functionArguments</span>: [token1, token2, <span class="literal">false</span>],</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>function</code></strong>: 这里与之前的调用类似，<code>$&#123;moduleAddress&#125;</code> 是合约地址，<code>router</code> 是合约名称，<code>create_pool</code> 是函数名。</li>
+<li><strong><code>functionArguments</code></strong>: 按数组形式传入函数所需的三个参数 <code>[token1, token2, false]</code>。</li>
+</ul>
+<h4 id="提交交易"><a href="#提交交易" class="headerlink" title="提交交易"></a>提交交易</h4><p>调用 <code>signAndSubmitTransaction</code> 提交交易，并等待交易完成：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> responseCreatePool = <span class="keyword">await</span> <span class="title function_">signAndSubmitTransaction</span>(transactionCreatePool);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等待交易完成</span></span><br><span class="line"><span class="keyword">await</span> aptos.<span class="title function_">waitForTransaction</span>(&#123; <span class="attr">transactionHash</span>: responseCreatePool.<span class="property">hash</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>responseCreatePool</code> 包含交易的哈希值，使用该哈希值等待交易上链成功。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过以上步骤，我们可以实现：</p>
+<ol>
+<li>从 Aptos 链上拉取数据（如合约中定义的 <code>name</code> 方法）。</li>
+<li>创建并提交链上交易，调用 <code>entry</code> 方法（如 <code>create_pool</code> 方法）。</li>
+</ol>
+<p>通过使用 Aptos SDK 和钱包适配器，我们能够方便地与链上合约进行交互，并在 React 应用中实现链上功能。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Aptos/"># Aptos</a>
+                    
+                        <a href="/tags/%E5%BC%80%E5%8F%91/"># 开发</a>
+                    
+                        <a href="/tags/LiquidityNFT/"># LiquidityNFT</a>
+                    
+                        <a href="/tags/%E5%89%8D%E7%AB%AF/"># 前端</a>
+                    
+                        <a href="/tags/React/"># React</a>
+                    
+                        <a href="/tags/Typescript/"># Typescript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2024/10/14/Aptos%20Move%E5%BC%80%E5%8F%91%EF%BC%9Adeploy-object/">Aptos Move开发：deploy-object</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Gauss | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
