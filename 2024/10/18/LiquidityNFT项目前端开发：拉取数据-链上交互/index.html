@@ -241,7 +241,7 @@
 <li><code>name</code>: 函数名。</li>
 </ul>
 </li>
-<li><p><strong><code>typeArguments</code></strong>: 泛型参数的类型。如果函数不需要泛型参数，传入空数组 <code>[]</code>。</p>
+<li><p><strong><code>typeArguments</code></strong>: 泛型参数的类型。这个函数的接口如下所示。如果函数不需要泛型参数，传入空数组 <code>[]</code>。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#[view]</span><br><span class="line">public fun name&lt;T: key&gt;(metadata: object::Object&lt;T&gt;): string::String</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong><code>functionArguments</code></strong>: 传入函数的实际参数列表，使用数组的形式传递 <code>[参数1, 参数2, ...]</code>。</p>
@@ -250,7 +250,6 @@
 <h4 id="结果处理："><a href="#结果处理：" class="headerlink" title="结果处理："></a>结果处理：</h4><p><code>result</code> 是一个包含 Move 值的数组。在这个例子中，调用 <code>name</code> 函数会返回一个 <code>string</code> 类型的值，可以通过 <code>result[0]</code> 获取这个值：</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result[<span class="number">0</span>]); <span class="comment">// 输出链上返回的名字</span></span><br></pre></td></tr></table></figure>
 
-<hr>
 <h2 id="二、链上交互"><a href="#二、链上交互" class="headerlink" title="二、链上交互"></a>二、链上交互</h2><h3 id="1-导入钱包和交易包"><a href="#1-导入钱包和交易包" class="headerlink" title="1. 导入钱包和交易包"></a>1. 导入钱包和交易包</h3><p>首先，从 <code>wallet-adapter-react</code> 包中导入 <code>useWallet</code> 和 <code>InputTransactionData</code>：</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useWallet, <span class="title class_">InputTransactionData</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@aptos-labs/wallet-adapter-react&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
@@ -274,8 +273,8 @@
 <p><code>responseCreatePool</code> 包含交易的哈希值，使用该哈希值等待交易上链成功。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过以上步骤，我们可以实现：</p>
 <ol>
-<li>从 Aptos 链上拉取数据（如合约中定义的 <code>name</code> 方法）。</li>
-<li>创建并提交链上交易，调用 <code>entry</code> 方法（如 <code>create_pool</code> 方法）。</li>
+<li>从 Aptos 链上拉取数据。</li>
+<li>创建并提交链上交易，调用 <code>entry</code> 方法。</li>
 </ol>
 <p>通过使用 Aptos SDK 和钱包适配器，我们能够方便地与链上合约进行交互，并在 React 应用中实现链上功能。</p>
 
@@ -310,6 +309,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/10/24/%E7%94%A8nginx%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2react%E9%A1%B9%E7%9B%AE/">用nginx在服务器上部署react项目</a>
             
             
             <a class="next" rel="next" href="/2024/10/14/Aptos%20Move%E5%BC%80%E5%8F%91%EF%BC%9Adeploy-object/">Aptos Move开发：deploy-object</a>

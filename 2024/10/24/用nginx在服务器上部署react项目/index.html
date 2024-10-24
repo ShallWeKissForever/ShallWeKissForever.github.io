@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Gauss">
+
+
+
+
+
+<title>用nginx在服务器上部署react项目 | Gauss&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/head.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Gauss&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Gauss&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">用nginx在服务器上部署react项目</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Gauss</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 24, 2024&nbsp;&nbsp;15:26:49</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>本文详细记录了如何在 Ubuntu 系统中使用 Nginx 部署前端项目的步骤。</p>
+<h2 id="1-安装必要的软件包"><a href="#1-安装必要的软件包" class="headerlink" title="1. 安装必要的软件包"></a>1. 安装必要的软件包</h2><p>首先，确保系统中的软件包管理器和所需工具都是最新的。运行以下命令来安装 Nginx、Node.js 和其他相关工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install -y nginx</span><br><span class="line"><span class="built_in">sudo</span> apt install -y curl</span><br><span class="line"><span class="built_in">sudo</span> apt install -y nodejs</span><br><span class="line"><span class="built_in">sudo</span> apt install -y npm</span><br><span class="line"><span class="built_in">sudo</span> npm install -g typescript</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-克隆项目并进入前端目录"><a href="#2-克隆项目并进入前端目录" class="headerlink" title="2. 克隆项目并进入前端目录"></a>2. 克隆项目并进入前端目录</h2><p>使用 Git 将项目克隆到本地，并进入项目的前端目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ShallWeKissForever/Liquidity_NFT.git</span><br><span class="line"><span class="built_in">cd</span> ./Liquidity_NFT/liquiditynft_frontend/</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-更新依赖包"><a href="#3-更新依赖包" class="headerlink" title="3. 更新依赖包"></a>3. 更新依赖包</h2><p>在项目的前端目录中，使用以下命令更新依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-构建项目"><a href="#4-构建项目" class="headerlink" title="4. 构建项目"></a>4. 构建项目</h2><p>使用 <code>npm run build</code> 命令构建项目，构建完成后会生成一个 <code>dist</code> 文件夹，其中包含了网站的静态文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<p>构建完成后，进入 <code>dist</code> 文件夹，并使用 <code>pwd</code> 命令查看当前文件夹的绝对路径，稍后我们将用到这个路径。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> dist</span><br><span class="line"><span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-配置-Nginx"><a href="#5-配置-Nginx" class="headerlink" title="5. 配置 Nginx"></a>5. 配置 Nginx</h2><p>接下来，编辑 Nginx 的配置文件，将其指向构建好的静态文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nano /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>http&#123;&#125;</code> 块中添加以下内容，配置新的服务器块：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>; <span class="comment"># 或者 443，如果使用 HTTPS</span></span><br><span class="line">    <span class="attribute">server_name</span> <span class="number">162.14.114.2</span>; <span class="comment"># 你的域名或服务器的 IP 地址</span></span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">root</span> /home/lighthouse/Liquidity_NFT/liquiditynft_frontend/dist; <span class="comment"># 使用 pwd 查看到的 dist 目录的绝对路径</span></span><br><span class="line">        <span class="attribute">index</span> index.html;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html; <span class="comment"># 处理前端路由</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果需要支持 HTTPS，添加以下内容：</span></span><br><span class="line">    <span class="comment"># listen 443 ssl;</span></span><br><span class="line">    <span class="comment"># ssl_certificate /path/to/your/cert.pem; # SSL 证书路径</span></span><br><span class="line">    <span class="comment"># ssl_certificate_key /path/to/your/key.pem; # SSL 密钥路径</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完成编辑后，按 <code>Ctrl + X</code> 退出编辑器，按 <code>Y</code> 保存更改。</p>
+<h3 id="可选：配置-HTTPS"><a href="#可选：配置-HTTPS" class="headerlink" title="可选：配置 HTTPS"></a>可选：配置 HTTPS</h3><p>如果你有 SSL 证书并希望使用 HTTPS，还可以在 Nginx 配置文件中添加以下内容：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">ssl_certificate</span> /path/to/your/cert.pem; <span class="comment"># SSL 证书路径</span></span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /path/to/your/key.pem; <span class="comment"># SSL 密钥路径</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置完成后，重新启动 Nginx。</p>
+<h2 id="6-检查-Nginx-配置文件是否正确"><a href="#6-检查-Nginx-配置文件是否正确" class="headerlink" title="6. 检查 Nginx 配置文件是否正确"></a>6. 检查 Nginx 配置文件是否正确</h2><p>使用以下命令来检查 Nginx 配置文件的语法是否正确：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t</span><br></pre></td></tr></table></figure>
+
+<p>如果配置无误，继续下一步。</p>
+<h2 id="7-配置目录访问权限"><a href="#7-配置目录访问权限" class="headerlink" title="7. 配置目录访问权限"></a>7. 配置目录访问权限</h2><p>为了确保 Nginx 能够正确访问项目的静态文件，需要调整相关目录的权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> -R o+r /home/lighthouse/Liquidity_NFT/liquiditynft_frontend/dist</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> -R o+x /home/lighthouse /home/lighthouse/Liquidity_NFT /home/lighthouse/Liquidity_NFT/liquiditynft_frontend</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> o+x /home/lighthouse</span><br></pre></td></tr></table></figure>
+
+<p>这些命令确保 Nginx 有权限读取文件和进入相关目录。</p>
+<h2 id="8-重启-Nginx-以应用更改"><a href="#8-重启-Nginx-以应用更改" class="headerlink" title="8. 重启 Nginx 以应用更改"></a>8. 重启 Nginx 以应用更改</h2><p>调整权限后，重启 Nginx 以应用新的配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-访问网站"><a href="#9-访问网站" class="headerlink" title="9. 访问网站"></a>9. 访问网站</h2><p>配置完成后，打开浏览器并输入你的服务器域名或 IP 地址，即可访问已部署的网站。</p>
+<p><img src="/../images/%E7%94%A8nginx%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2react%E9%A1%B9%E7%9B%AE/1.png" alt="页面展示"></p>
+<hr>
+<p>至此，你已成功在 Ubuntu 系统中使用 Nginx 部署了一个前端网站。按照以上步骤，你可以快速完成从克隆项目、构建前端到配置 Nginx 的整个流程。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BC%80%E5%8F%91/"># 开发</a>
+                    
+                        <a href="/tags/%E5%89%8D%E7%AB%AF/"># 前端</a>
+                    
+                        <a href="/tags/nginx/"># nginx</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2024/10/18/LiquidityNFT%E9%A1%B9%E7%9B%AE%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%EF%BC%9A%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE-%E9%93%BE%E4%B8%8A%E4%BA%A4%E4%BA%92/">LiquidityNFT项目前端开发：拉取数据&链上交互</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Gauss | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
